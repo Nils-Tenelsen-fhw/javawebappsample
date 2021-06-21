@@ -13,15 +13,15 @@ node {
     stage('init') {
       checkout scm
     }
-  
-    stage('build') {
-      sh 'mvn clean package'
-    }
 
     stage('test') {
       sh 'mvn clean test'
     }
   
+    stage('build') {
+      sh 'mvn clean package -Dmaven.test.skip=true'
+    }
+
     stage('deploy') {
       def resourceGroup = 'pipeline-rg'
       def webAppName = 'pipeline-app-was'
