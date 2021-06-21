@@ -17,6 +17,10 @@ node {
     stage('build') {
       sh 'mvn clean package'
     }
+
+    stage('test') {
+      sh 'mvn clean test'
+    }
   
     stage('deploy') {
       def resourceGroup = 'pipeline-rg'
