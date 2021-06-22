@@ -14,12 +14,12 @@ node {
       checkout scm
     }
 
-    stage('test') {
-      sh 'mvn clean test'
-    }
-  
     stage('build') {
       sh 'mvn clean package -Dmaven.test.skip=true'
+    }
+
+    stage('test') {
+      sh 'mvn clean test'
     }
 
     stage('deploy') {
