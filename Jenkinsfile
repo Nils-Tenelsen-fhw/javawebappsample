@@ -42,7 +42,8 @@ node {
           sh 'az logout'
         }
     } finally {
-        archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+        archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+        archiveArtifacts artifacts: '**/*.jar', fingerprint: true
         junit 'build/test-results/test/*.xml'
     }
   }
