@@ -44,7 +44,6 @@ node {
     } finally {
         archiveArtifacts artifacts: 'target/*.war', fingerprint: true
         archiveArtifacts artifacts: '**/*.jar', fingerprint: true
-        junit 'build/test-results/test/*.xml'
     }
   }
 }
