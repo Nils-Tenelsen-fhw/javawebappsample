@@ -8,6 +8,7 @@ def getFtpPublishProfile(def publishProfilesJson) {
 }
 
 pipeline {
+    agent any
     node {
       withEnv(['AZURE_SUBSCRIPTION_ID=078464ec-10e7-409d-a3dd-633527f88d50',
             'AZURE_TENANT_ID=26aa7fd9-ab4d-4fc6-9a5f-99d4882840bc']) {
