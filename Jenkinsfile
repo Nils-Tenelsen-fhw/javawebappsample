@@ -19,7 +19,7 @@ node {
     }
 
     stage('test') {
-      sh 'mvn clean test'
+      sh 'mvn test'
     }
 
     stage('deploy') {
