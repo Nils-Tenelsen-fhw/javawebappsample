@@ -24,7 +24,7 @@ node {
     }
 
     stage('archive image') {
-      def warName = BUILD_NUMBER + '_calculator.war'
+      def warName = 'calculator.war_' + BUILD_NUMBER
       echo warName
       archiveArtifacts artifacts: 'target/*.war', fingerprint: true
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
