@@ -25,7 +25,7 @@ node {
 
     stage('archive image') {
       def warName = 'calculator.war_' + BUILD_NUMBER
-      def warNameDir = 'image_upload' + warName
+      def warNameDir = 'image_upload/' + warName
       archiveArtifacts artifacts: 'target/*.war', fingerprint: true
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
       sh 'mkdir -p image_upload'
