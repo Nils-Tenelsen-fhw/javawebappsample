@@ -27,8 +27,7 @@ node {
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
       sh 'mkdir -p image_upload'
       sh 'cp target/*.war image_upload'
-      sh 'cp target/.*.jar image_upload'
-      sh 'ls image_upload'
+      sh 'az storage blob upload-batch -d imagewas -s image_upload --account-name $storageAccountName'
       sh 'rm -r -f image_upload'
     }
 
