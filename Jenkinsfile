@@ -25,12 +25,13 @@ node {
 
     stage('archive image') {
       def warName = 'calculator.war_' + BUILD_NUMBER
+      def warNameDir = image_upload + warName
       echo warName
       archiveArtifacts artifacts: 'target/*.war', fingerprint: true
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
       sh 'mkdir -p image_upload'
       sh 'cp target/*.war image_upload'
-      sh 'mv image_upload/*.war image_upload/$warName'
+      sh 'mv image_upload/*.war warNameDir'
       //login to azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
        sh '''
