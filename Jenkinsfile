@@ -23,6 +23,11 @@ node {
           sh 'mvn test'
         }
 
+        stage('archive image') {
+          archiveArtifacts artifacts: 'target/*.war', fingerprint: true
+          archiveArtifacts artifacts: '**/*.jar', fingerprint: true
+        }
+
         stage('test deploy') {
           def resourceGroup = 'pipeline-rg'
           def webAppName = 'pipeline-test-was'
