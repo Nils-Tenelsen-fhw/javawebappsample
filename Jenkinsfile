@@ -30,7 +30,7 @@ node {
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
       sh 'mkdir -p image_upload'
       sh 'cp target/*.war image_upload'
-      sh 'mv image_upload/*.war warNameDir'
+      sh "mv image_upload/*.war $warNameDir"
       //login to azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
        sh '''
@@ -40,7 +40,7 @@ node {
       }
       //provide extra credentials for blob storage
       withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
-       sh "'"az storage blob upload-batch -d images -s image_upload --pattern '$warName' --account-name imageswas"
+       sh "az storage blob upload-batch -d images -s image_upload --pattern $warName --account-name imageswas"
       }
       sh 'rm -r -f image_upload'
       sh 'az logout'
