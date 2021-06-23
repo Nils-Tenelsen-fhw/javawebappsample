@@ -71,4 +71,5 @@ node {
       // log out
       sh 'az logout'
     }
+  }
 }
