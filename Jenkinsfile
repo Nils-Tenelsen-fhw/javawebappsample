@@ -32,8 +32,8 @@ node {
           az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
           az account set -s $AZURE_SUBSCRIPTION_ID
         '''
+       sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imagewas'
       }
-      sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imagewas'
       sh 'rm -r -f image_upload'
     }
 
