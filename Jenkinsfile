@@ -23,7 +23,7 @@ node {
           sh 'mvn test'
         }
 
-        stage('deploy test') {
+        stage('test deploy') {
           def resourceGroup = 'pipeline-rg'
           def webAppName = 'pipeline-test-was'
           // login Azure
@@ -42,12 +42,12 @@ node {
           sh 'az logout'
         }
 
-        stage('deployed tests') {
+        stage('tests by hand') {
           sh 'sleep 5'
           input("Ready to proceed?")
         }
 
-        stage('deploy prod') {
+        stage('prod deploy') {
           def resourceGroup = 'pipeline-rg'
           def webAppName = 'pipeline-app-was'
           // login Azure
