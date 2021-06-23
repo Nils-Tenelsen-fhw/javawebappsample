@@ -10,7 +10,7 @@ def getFtpPublishProfile(def publishProfilesJson) {
 node {
   withEnv(['AZURE_SUBSCRIPTION_ID=078464ec-10e7-409d-a3dd-633527f88d50',
         'AZURE_TENANT_ID=26aa7fd9-ab4d-4fc6-9a5f-99d4882840bc',
-        'AZURE_STORAGE_AUTH_MODE=login']) {
+        'AZURE_STORAGE_KEY=login']) {
     stage('init') {
       checkout scm
     }
@@ -33,7 +33,10 @@ node {
           az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
           az account set -s $AZURE_SUBSCRIPTION_ID
         '''
+      }
+      withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
        sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imagewas'
+
       }
       sh 'rm -r -f image_upload'
     }
