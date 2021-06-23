@@ -35,9 +35,8 @@ node {
         '''
       }
       sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imageswas'
-      withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
-      }
       sh 'rm -r -f image_upload'
+      sh 'az logout'
     }
 
     stage('test deploy') {
