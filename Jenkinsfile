@@ -34,8 +34,9 @@ node {
           az account set -s $AZURE_SUBSCRIPTION_ID
         '''
       }
+      sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imageswas'
       withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
-       sh 'az storage blob upload-batch -d images -s image_upload --pattern calculator-???.war --account-name imageswas'
+
 
       }
       sh 'rm -r -f image_upload'
