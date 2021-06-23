@@ -25,7 +25,7 @@ node {
     stage('archive image') {
       archiveArtifacts artifacts: 'target/*.war', fingerprint: true
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
-      sh 'mkdir image_upload'
+      sh 'mkdir -p image_upload'
       sh 'cp target/*.war image_upload'
       sh 'cp **/*.jar image_upload'
       sh 'ls image_upload'
