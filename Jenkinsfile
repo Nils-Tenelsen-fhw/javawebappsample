@@ -21,7 +21,6 @@ node {
 
         stage('unit tests') {
           sh 'mvn test'
-          input("Ready to proceed?")
         }
 
         stage('deploy test') {
@@ -45,6 +44,7 @@ node {
 
         stage('deployed tests') {
           sh 'sleep 5'
+          input("Ready to proceed?")
         }
 
         stage('deploy prod') {
