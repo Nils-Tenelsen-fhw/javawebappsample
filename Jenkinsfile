@@ -40,7 +40,7 @@ node {
       }
       //provide extra credentials for blob storage
       withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
-       sh 'az storage blob upload-batch -d images -s image_upload --pattern $warName --account-name imageswas'
+       sh "'"az storage blob upload-batch -d images -s image_upload --pattern '$warName' --account-name imageswas"
       }
       sh 'rm -r -f image_upload'
       sh 'az logout'
