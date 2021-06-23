@@ -26,7 +26,7 @@ node {
       archiveArtifacts artifacts: 'target/*.war', fingerprint: true
       archiveArtifacts artifacts: '**/*.jar', fingerprint: true
       sh 'mkdir image_upload'
-      sh 'cp target/*.wa image_upload'
+      sh 'cp target/*.war image_upload'
       sh 'cp **/*.jar image_upload'
       sh 'ls image_upload'
       sh 'rm -r -f image_upload'
