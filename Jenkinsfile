@@ -86,7 +86,7 @@ node {
        sh "az storage blob download-batch -d images -s image_upload --pattern $warName  --account-name imageswas"
       }
       sh 'az logout'
-      sh 'mv $warName $warNameDir
+      sh 'mv $warName $warNameDir'
     }
 
     stage('tests by hand') {
