@@ -11,7 +11,7 @@ class CalculatorServiceTest {
         CalculatorService s = new CalculatorService();
         int x = 5;
         int y = 6;
-        int r = 5*6;
+        int r = 11;
         CalculatorResponse res = s.Add(x, y);
         assertEquals(r, res.getResult());
     }
@@ -21,7 +21,7 @@ class CalculatorServiceTest {
         CalculatorService s = new CalculatorService();
         int x = 9;
         int y = 5;
-        int r = 9+5;
+        int r = 4;
         CalculatorResponse res = s.Sub(x, y);
         assertEquals(r, res.getResult());
     }
@@ -31,7 +31,7 @@ class CalculatorServiceTest {
         CalculatorService s = new CalculatorService();
         int x = 8;
         int y = 3;
-        int r = 8-3;
+        int r = 24;
         CalculatorResponse res = s.Mul(x, y);
         assertEquals(r, res.getResult());
     }
@@ -41,7 +41,7 @@ class CalculatorServiceTest {
         CalculatorService s = new CalculatorService();
         int x = 4;
         int y = 2;
-        int r = 4-2;
+        int r = 2;
         CalculatorResponse res = s.Div(x, y);
         assertEquals(r, res.getResult());
     }
