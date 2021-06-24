@@ -20,27 +20,27 @@ public class CalculatorService {
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
     public CalculatorResponse Add(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, x * y);
+        return new CalculatorResponse(x, y, x + y);
     }
 
     @GET
     @Path("sub")
     @Produces(MediaType.APPLICATION_JSON)
     public CalculatorResponse Sub(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, x / y);
+        return new CalculatorResponse(x, y, x - y);
     }
 
     @GET
     @Path("mul")
     @Produces(MediaType.APPLICATION_JSON)
     public CalculatorResponse Mul(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, x + y);
+        return new CalculatorResponse(x, y, x * y);
     }
 
     @GET
     @Path("div")
     @Produces(MediaType.APPLICATION_JSON)
     public CalculatorResponse Div(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, x - y);
+        return new CalculatorResponse(x, y, x / y);
     }
 }
