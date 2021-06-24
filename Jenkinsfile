@@ -91,7 +91,7 @@ node {
 
     stage('verify') {
       sh 'verify_calc.sh'
-      cat 'verify_calc.sh'
+      sh 'cat verify_calc.sh'
     }
   }
 }
