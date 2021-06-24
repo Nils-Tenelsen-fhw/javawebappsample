@@ -69,6 +69,11 @@ node {
       sh 'az logout'
     }
 
+    stage('tests by hand') {
+      sh 'sleep 5'
+      input("Ready to proceed?")
+    }
+
     stage('retrieve image') {
       def warName = 'calculator-1.0.war_' + BUILD_NUMBER
       def warNameDir = 'image_download/calculator-1.0.war_' + BUILD_NUMBER
@@ -90,11 +95,6 @@ node {
       sh "mv $warNameDir $warNameDirClean"
     }
 
-    stage('tests by hand') {
-      sh 'sleep 5'
-      input("Ready to proceed?")
-    }
-
     stage('prod deploy') {
       def resourceGroup = 'pipeline-rg'
       def webAppName = 'pipeline-app-was'
@@ -109,7 +109,7 @@ node {
       def pubProfilesJson = sh script: "az webapp deployment list-publishing-profiles -g $resourceGroup -n $webAppName", returnStdout: true
       def ftpProfile = getFtpPublishProfile pubProfilesJson
       // upload package
-      sh "curl -T target/calculator-1.0.war $ftpProfile.url/webapps/ROOT.war -u '$ftpProfile.username:$ftpProfile.password'"
+      sh "curl -T image_download/calculator-1.0.war $ftpProfile.url/webapps/ROOT.war -u '$ftpProfile.username:$ftpProfile.password'"
       // log out
       sh 'az logout'
     }
