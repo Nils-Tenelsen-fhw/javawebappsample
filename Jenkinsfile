@@ -16,7 +16,7 @@ node {
     }
 
     stage('build') {
-      sh 'mvn clean package -Dmaven.test.skip=true'
+      sh 'build_calc.sh'
     }
 
     stage('unit tests') {
