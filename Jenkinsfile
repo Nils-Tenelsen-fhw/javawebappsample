@@ -13,6 +13,8 @@ node {
         'AZURE_STORAGE_KEY=login']) {
     stage('init') {
       checkout scm
+      sh 'rm -r -f $WORKSPACE/target'
+      sh 'rm -r -f $WORKSPACE/checkSum.txt'
     }
 
     stage('build') {
@@ -92,5 +94,4 @@ node {
     stage('verify') {
       sh 'verify_calc.sh'
     }
-  }
 }
