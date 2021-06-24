@@ -71,7 +71,8 @@ node {
 
     stage('retrieve image') {
       def warName = 'calculator-1.0.war_' + BUILD_NUMBER
-      def warNameClean = 'calculator-1.0.war'
+      def warNameDir = 'image_download/calculator-1.0.war_' + BUILD_NUMBER
+      def warNameDirClean = 'image_download/calculator-1.0.war'
       sh 'mkdir -p image_download'
       //login to azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
@@ -86,7 +87,7 @@ node {
        sh "az storage blob download-batch -d image_download -s images --pattern $warName  --account-name imageswas"
       }
       sh 'az logout'
-      sh 'mv image_download/$warName image_download/$warNameClean'
+      sh 'mv $warNameDir $warNameDirClean'
     }
 
     stage('tests by hand') {
