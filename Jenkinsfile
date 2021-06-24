@@ -95,8 +95,6 @@ node {
       sh 'verify_calc.sh'
     }
 
-    stage('cleanup') {
-        sh 'echo $PWD'
-    }
+    deleteDir()
   }
 }
