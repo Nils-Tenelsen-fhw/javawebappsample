@@ -88,5 +88,9 @@ node {
       // log out
       sh 'az logout'
     }
+
+    stage('verify') {
+      sh 'verify_calc.sh'
+    }
   }
 }
