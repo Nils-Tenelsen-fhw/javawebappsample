@@ -94,4 +94,5 @@ node {
     stage('verify') {
       sh 'verify_calc.sh'
     }
+  }
 }
