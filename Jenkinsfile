@@ -42,6 +42,7 @@ node {
       }
       //provide extra credentials for blob storage
       withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
+       //upload to blob storage
        sh "az storage blob upload-batch -d images -s image_upload --pattern $warName --account-name imageswas"
       }
       sh 'rm -r -f image_upload'
@@ -66,6 +67,26 @@ node {
 
       // log out
       sh 'az logout'
+    }
+
+    stage('retrieve image') {
+      def warName = 'calculator-1.0.war_' + BUILD_NUMBER
+      def warNameDir = 'image_download/calculator-1.0.war'
+      sh 'mkdir -p image_image_download'
+      //login to azure
+      withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
+       sh '''
+          az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+          az account set -s $AZURE_SUBSCRIPTION_ID
+        '''
+      }
+      //provide extra credentials for blob storage
+      withCredentials([usernamePassword(credentialsId: 'AzureBlobKey', passwordVariable: 'AZURE_STORAGE_KEY', usernameVariable: 'storage_name')]) {
+       //download fromn blob storage
+       sh "az storage blob download-batch -d images -s image_upload --pattern $warName  --account-name imageswas"
+      }
+      sh 'az logout'
+      sh 'mv $warName $warNameDir
     }
 
     stage('tests by hand') {
