@@ -45,8 +45,9 @@ node {
        //upload to blob storage
        sh "az storage blob upload-batch -d images -s image_upload --pattern $warName --account-name imageswas"
       }
-      sh 'rm -r -f image_upload'
       sh 'az logout'
+      sh 'rm -r -f image_upload'
+
     }
 
     stage('test deploy') {
